@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Pacifico } from "next/font/google";
-import useSubscribe from "../hooks/useSubscribe";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 
 const pacifico = Pacifico({
@@ -56,13 +55,6 @@ const navigation = {
 
 export default function Footer() {
   const [year, setYear] = useState(new Date().getFullYear());
-  const [email, setEmail] = useState("");
-  const { subscribe, loading } = useSubscribe();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await subscribe(email, () => setEmail(""));
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
