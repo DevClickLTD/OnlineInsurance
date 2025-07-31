@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTA() {
   return (
     <div className="bg-white">
@@ -13,15 +15,15 @@ export default function CTA() {
             най-подходящото решение за вас.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
+            <Link
               href="/services"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Всички услуги
-            </a>
-            <a href="/contact" className="text-sm/6 font-semibold text-white">
+            </Link>
+            <Link href="/contact" className="text-sm/6 font-semibold text-white">
               Контакти <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
           <svg
             viewBox="0 0 1024 1024"

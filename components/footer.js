@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Pacifico } from "next/font/google";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import Link from "next/link";
 
 const pacifico = Pacifico({
   subsets: ["latin", "cyrillic"],
@@ -13,27 +14,13 @@ const pacifico = Pacifico({
 
 const navigation = {
   solutions: [
-    { name: "Автомобилно застраховане", href: "/services/auto-insurance" },
-    { name: "Имуществено застраховане", href: "/services/property-insurance" },
-    { name: "Здравно застраховане", href: "/services/health-insurance" },
-    { name: "Животозастраховане", href: "/services/life-insurance" },
-    { name: "Пътно застраховане", href: "/services/travel-insurance" },
-  ],
-  support: [
-    { name: "Подаване на претенция", href: "/claims" },
-    { name: "Често задавани въпроси", href: "/faq" },
-    { name: "Онлайн помощ", href: "/support" },
+    { name: "Застрахователни услуги", href: "/services" },
   ],
   company: [
-    { name: "За нас", href: "/about" },
     { name: "Блог", href: "/blog" },
-    { name: "Контакти", href: "/contact" },
-    { name: "Кариери", href: "/careers" },
   ],
   legal: [
-    { name: "Общи условия", href: "/terms" },
     { name: "Политика за поверителност", href: "/privacy-policy" },
-    { name: "Условия за ползване", href: "/usage-terms" },
   ],
   social: [
     {
@@ -100,76 +87,57 @@ export default function Footer() {
         </svg>
       </div>
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 sm:pt-24 lg:px-8 lg:pt-32">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
+          <div className="lg:col-span-1 flex justify-center lg:justify-start">
             <img alt="" src="/logo.png" width={168} height={38} className="h-18 w-auto" />
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Solutions
+          <div className="lg:col-span-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-12">
+              <div className="text-center sm:text-left">
+                <h3 className="text-base font-semibold text-gray-900 mb-6">
+                  Услуги
                 </h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <ul role="list" className="space-y-3">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Support
+              <div className="text-center sm:text-left">
+                <h3 className="text-base font-semibold text-gray-900 mb-6">
+                  Компания
                 </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Company
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <ul role="list" className="space-y-3">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
+              <div className="text-center sm:text-left">
+                <h3 className="text-base font-semibold text-gray-900 mb-6">Правни</h3>
+                <ul role="list" className="space-y-3">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -177,24 +145,26 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between">
-          <div className="flex gap-x-6 md:order-2">
-            {navigation.social.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                target={item.target}
-                rel={item.rel}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                <span className="sr-only">{item.name}</span>
-                <item.icon aria-hidden="true" className="size-6" />
-              </a>
-            ))}
+                <div className="mt-12 border-t border-gray-900/10 pt-8">
+          <div className="flex flex-col items-center space-y-6 md:flex-row md:justify-between md:space-y-0">
+            <p className="text-sm text-gray-600 text-center md:text-left">
+              &copy; {year} OnlineInsurance.bg - Всички права запазени.
+            </p>
+            <div className="flex gap-x-6">
+              {navigation.social.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  target={item.target}
+                  rel={item.rel}
+                  className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                >
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon aria-hidden="true" className="size-6" />
+                </Link>
+              ))}
+            </div>
           </div>
-          <p className="mt-8 text-sm/6 text-gray-600 md:order-1 md:mt-0">
-&copy; {year} OnlineInsurance.bg - Всички права запазени.
-          </p>
         </div>
       </div>
     </footer>
