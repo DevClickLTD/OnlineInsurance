@@ -1,0 +1,7 @@
+/* Ensure Gutenberg styles are applied */
+@import url("https://onlineinsurance.bg/wp-includes/css/dist/block-library/style.min.css");
+
+@import "./wordpress-generated.css";
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
