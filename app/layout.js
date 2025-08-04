@@ -6,7 +6,6 @@ import Script from "next/script";
 import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
 import BackToTop from "../components/BackToTop";
-import CallButton from "../components/CallButton";
 import NextTopLoader from "nextjs-toploader";
 import "../styles/globals.css";
 import { Roboto } from "next/font/google";
@@ -102,7 +101,6 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
         <NextTopLoader showSpinner={false} color="#47a7d7"/>
         <BackToTop />
-        <CallButton />
         <ImagePreloader />
         <Navigation />
         <main>{children}</main>
