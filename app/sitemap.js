@@ -32,7 +32,7 @@ export default async function sitemap() {
         priority: 1.0,
       },
       {
-        url: `${baseUrl}/services`,
+        url: `${baseUrl}/zastrahovki`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.8,
@@ -53,7 +53,7 @@ export default async function sitemap() {
 
     // Dynamic service routes
     const serviceRoutes = services?.map((service) => ({
-      url: `${baseUrl}/services/${service.slug}`,
+      url: `${baseUrl}/zastrahovki/${service.slug}`,
       lastModified: new Date(service.date || new Date()),
       changeFrequency: "weekly",
       priority: 0.7,
@@ -81,7 +81,7 @@ export default async function sitemap() {
         priority: 1.0,
       },
       {
-        url: `${baseUrl}/services`,
+        url: `${baseUrl}/zastrahovki`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.8,

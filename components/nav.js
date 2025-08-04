@@ -35,7 +35,7 @@ export default function Navigation() {
     categories: [
       {
         id: "categories",
-        name: "Услуги",
+        name: "Застраховки",
         featured: [],
         services: [],
       },
@@ -65,10 +65,10 @@ export default function Navigation() {
           categories: [
             {
               id: "categories",
-              name: "Услуги",
+              name: "Застраховки",
               featured: featured.map((service) => ({
                 name: service.title.rendered,
-                href: `/services/${service.slug}`,
+                href: `/zastrahovki/${service.slug}`,
                 imageSrc:
                   service.yoast_head_json?.og_image?.[0]?.url ||
                   "/placeholder.webp",
@@ -77,7 +77,7 @@ export default function Navigation() {
               services: remainingServices.map((service) => ({
                 id: service.id,
                 name: service.title.rendered,
-                href: `/services/${service.slug}`,
+                href: `/zastrahovki/${service.slug}`,
               })),
             },
           ],
@@ -306,7 +306,7 @@ export default function Navigation() {
                                             width={560}
                                             height={560}
                                             alt=""
-                                            src="/menu-hero-image.jpg"
+                                            src="/insurance.webp"
                                             className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                           />
                                         </div>

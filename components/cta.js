@@ -16,13 +16,13 @@ export default function CTA() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="/services"
+              href="/zastrahovki"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Всички услуги
+              Всички застраховки
             </Link>
-            <Link href="/contact" className="text-sm/6 font-semibold text-white">
-              Контакти <span aria-hidden="true">→</span>
+            <Link href="/blog" className="text-sm/6 font-semibold text-white">
+              Блог <span aria-hidden="true">→</span>
             </Link>
           </div>
           <svg

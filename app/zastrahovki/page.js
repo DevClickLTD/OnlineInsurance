@@ -26,7 +26,7 @@ export const metadata = {
     description: "Разгледайте всички наши професионални услуги",
     images: [
       {
-        url: "/services-og-image.jpg",
+        url: "/zastrahovki-og-image.jpg",
         width: 1200,
         height: 630,
         alt: "OnlineInsurance.bg - Застрахователни услуги",
@@ -57,7 +57,7 @@ export default async function Services() {
         item: {
           "@type": "Service",
           name: service.title.rendered,
-          url: `https://example.bg/services/${service.slug}`,
+          url: `https://example.bg/zastrahovki/${service.slug}`,
           description:
             service.content.rendered.replace(/<[^>]+>/g, "").substring(0, 150) +
             "...",

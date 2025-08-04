@@ -38,7 +38,7 @@ export default function Incentives() {
             </div>
             <img
               alt=""
-              src="/menu-hero-image.jpg"
+              src="/insurance.webp"
               className="aspect-3/2 w-full rounded-lg bg-gray-100 object-cover"
             />
           </div>

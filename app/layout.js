@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="/hero-image-mobile.jpg"
+          href="/online-insurance.webp"
           type="image/jpg"
           media="(max-width: 640px)"
         />
@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="/hero-image-desktop.jpg"
+          href="/online-insurance.webp"
           type="image/jpg"
           media="(min-width: 641px)"
         />

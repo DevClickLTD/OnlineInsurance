@@ -14,7 +14,7 @@ const pacifico = Pacifico({
 
 const navigation = {
   solutions: [
-    { name: "Застрахователни услуги", href: "/services" },
+    { name: "Застрахователни услуги", href: "/zastrahovki" },
   ],
   company: [
     { name: "Блог", href: "/blog" },

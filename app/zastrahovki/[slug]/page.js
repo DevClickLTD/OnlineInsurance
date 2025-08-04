@@ -79,7 +79,7 @@ export default async function ServicePage({ params }) {
       description:
         service[0].content.rendered.replace(/<[^>]+>/g, "").substring(0, 200) +
         "...",
-      url: meta.canonical || `https://example.bg/services/${slug}`,
+      url: meta.canonical || `https://example.bg/zastrahovki/${slug}`,
       provider: {
         "@type": "Organization",
         name: "OnlineInsurance.bg",

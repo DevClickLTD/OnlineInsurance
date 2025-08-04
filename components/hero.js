@@ -11,7 +11,7 @@ export default function Hero() {
           <div className="w-full">
             {/* Директно използване на HTML img за максимална производителност на LCP */}
             <img
-              src="/hero-image-mobile.jpg"
+              src="/online-insurance.webp"
               width={640}
               height={400}
               alt="Hero image"
@@ -36,22 +36,16 @@ export default function Hero() {
               Онлайн застраховане
             </p>
             <p className="mt-6 text-sm font-medium text-pretty text-gray-500 font-display">
-              Открийте най-добрите застрахователни решения за автомобили, 
-              домове, здраве и живот. Получете безплатна оферта за 
-              минути с нашата удобна онлайн платформа.
+              Открийте най-добрите застрахователни решения за автомобили,
+              домове, здраве и живот. Получете безплатна оферта за минути с
+              нашата удобна онлайн платформа.
             </p>
             <div className="mt-8 flex items-center gap-x-4">
               <Link
-                href="/services"
+                href="/zastrahovki"
                 className="rounded-md bg-[#47a7d7] hover:bg-gray-300 hover:text-[#000000] px-3 py-2 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Услуги
-              </Link>
-              <Link
-                href="/contact"
-                className="text-sm font-semibold text-gray-900"
-              >
-                Контакти <span aria-hidden="true">→</span>
+                Застраховки
               </Link>
             </div>
           </div>
@@ -90,24 +84,24 @@ export default function Hero() {
                     Онлайн застраховане
                   </p>
                   <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 font-display">
-                    Открийте най-добрите застрахователни решения за автомобили, 
-                    домове, здраве и живот. Получете безплатна оферта за минути 
-                    и се насладете на сигурността, която заслужавате. Нашите 
-                    експерти са тук, за да ви помогнат да направите правилния избор 
-                    за вас и вашето семейство.
+                    Открийте най-добрите застрахователни решения за автомобили,
+                    домове, здраве и живот. Получете безплатна оферта за минути
+                    и се насладете на сигурността, която заслужавате. Нашите
+                    експерти са тук, за да ви помогнат да направите правилния
+                    избор за вас и вашето семейство.
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
                     <Link
-                      href="/services"
+                      href="/zastrahovki"
                       className="rounded-md bg-[#47a7d7] hover:bg-gray-300 hover:text-black px-3.5 py-2.5 text-sm font-semibold text-black shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Услуги
+                      Застраховки
                     </Link>
                     <Link
-                      href="/contact"
+                      href="/blog"
                       className="text-sm/6 font-semibold text-gray-900"
                     >
-                      Контакти <span aria-hidden="true">→</span>
+                      Блог <span aria-hidden="true">→</span>
                     </Link>
                   </div>
                 </div>
@@ -117,7 +111,7 @@ export default function Hero() {
           <div className="bg-gray-50 absolute inset-y-0 right-0 w-1/2">
             {/* Директно използване на HTML img за десктоп версията */}
             <img
-              src="/hero-image-desktop.jpg"
+              src="/online-insurance.webp"
               width={955}
               height={776}
               alt="Hero image"

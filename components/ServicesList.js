@@ -67,7 +67,7 @@ export default function ServicesList({ services }) {
         <div className="flex flex-col mt-8 space-y-20 lg:mt-8 lg:space-y-20">
           {services.map((service, index) => (
             <Link
-              href={`/services/${service.slug}`}
+              href={`/zastrahovki/${service.slug}`}
               className={`flex mt-8 mb-8 w-full max-w-full transition-opacity duration-300 ${
                 visibleServices.includes(index) ? "opacity-100" : "opacity-0"
               }`}

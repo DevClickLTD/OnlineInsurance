@@ -34,7 +34,7 @@ export const metadata = {
     description: "Най-добрите застрахователни решения за вас и вашето семейство",
     images: [
       {
-        url: "/hero-image-desktop.jpg",
+        url: "/online-insurance.webp",
         width: 1200,
         height: 630,
         alt: "OnlineInsurance.bg - Застрахователни услуги",
@@ -47,7 +47,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "OnlineInsurance.bg - Онлайн застрахователни услуги",
     description: "Най-добрите застрахователни решения за вас и вашето семейство",
-    images: ["/hero-image-desktop.jpg"],
+    images: ["/online-insurance.webp"],
   },
 };
 
