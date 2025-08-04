@@ -38,7 +38,7 @@ export default function LatestPosts() {
               {posts.length > 0 ? (
                 posts.map((post, index) => (
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/${post.slug}`}
                     key={post.id}
                     prefetch={true}
                   >

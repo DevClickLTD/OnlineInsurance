@@ -1,4 +1,4 @@
-import { getPostBySlug } from "../../../services/posts";
+import { getPostBySlug } from "../../services/posts";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
