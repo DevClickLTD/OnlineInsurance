@@ -4,7 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 const URL_FORM =
-  "https://onlineinsurance.bg/wp-json/contact-form-7/v1/contact-forms/43/feedback";
+  "https://onlineinsurance.admin-panels.com/wp-json/contact-form-7/v1/contact-forms/43/feedback";
 
 export default function ContactForm() {
   const [errors, setErrors] = useState({});

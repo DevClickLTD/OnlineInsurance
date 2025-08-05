@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://onlineinsurance.bg/wp-json/wp/v2";
+const API_BASE_URL = "https://onlineinsurance.admin-panels.com/wp-json/wp/v2";
 import { cache } from "react";
 
 /**

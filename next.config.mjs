@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "onlineinsurance.bg",
+        hostname: "onlineinsurance.admin-panels.com",
       },
       {
         protocol: "https",
