@@ -37,11 +37,7 @@ export default function LatestPosts() {
             <div className="mx-auto mt-16 grid !max-w-[80%] grid-cols-1 gap-x-8 gap-y-20 lg:mx-auto lg:max-w-none lg:grid-cols-3">
               {posts.length > 0 ? (
                 posts.map((post, index) => (
-                  <Link
-                    href={`/${post.slug}`}
-                    key={post.id}
-                    prefetch={true}
-                  >
+                  <Link href={`/${post.slug}`} key={post.id}>
                     <article className="flex flex-col items-start justify-between">
                       <div className="relative w-full">
                         <Image
@@ -57,7 +53,6 @@ export default function LatestPosts() {
                             "/placeholder.webp"
                           }
                           className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2"
-                          format="webp"
                         />
                         <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
                       </div>
@@ -93,7 +88,6 @@ export default function LatestPosts() {
                               )?.image?.url || "/placeholder.webp"
                             }
                             className="size-10 rounded-full bg-gray-100"
-                            format="webp"
                           />
                           <div className="text-sm/6 text-left">
                             <p className="font-semibold text-white">

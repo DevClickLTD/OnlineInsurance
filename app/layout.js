@@ -26,26 +26,26 @@ export async function generateMetadata() {
 
   return {
     metadataBase: new URL(`${protocol}://${host}`),
-      title: {
-    template: "%s | OnlineInsurance.bg",
-    default: "OnlineInsurance.bg | Онлайн застрахователни услуги",
-  },
+    title: {
+      template: "%s | OnlineInsurance.bg",
+      default: "OnlineInsurance.bg | Онлайн застрахователни услуги",
+    },
     description:
       "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот.",
     openGraph: {
-          title: "OnlineInsurance.bg | Онлайн застрахователни услуги",
-    description:
-      "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот.",
-      images: "/lawyer.webp",
+      title: "OnlineInsurance.bg | Онлайн застрахователни услуги",
+      description:
+        "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот.",
+      images: "/online-insurance.webp",
       type: "website",
       locale: "bg_BG",
       siteName: "OnlineInsurance.bg",
     },
     twitter: {
       card: "summary_large_image",
-          title: "OnlineInsurance.bg",
-    description: "Онлайн застрахователни услуги за вас и вашето семейство",
-      images: ["/lawyer.webp"],
+      title: "OnlineInsurance.bg",
+      description: "Онлайн застрахователни услуги за вас и вашето семейство",
+      images: ["/online-insurance.webp"],
     },
     robots: {
       index: true,
@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
           rel="preload"
           as="image"
           href="/online-insurance.webp"
-          type="image/jpg"
+          type="image/webp"
           media="(max-width: 640px)"
         />
 
@@ -92,14 +92,16 @@ export default function RootLayout({ children }) {
           rel="preload"
           as="image"
           href="/online-insurance.webp"
-          type="image/jpg"
+          type="image/webp"
           media="(min-width: 641px)"
         />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={roboto.className}>
-        <NextTopLoader showSpinner={false} color="#47a7d7"/>
+        {process.env.NODE_ENV !== "production" && (
+          <NextTopLoader showSpinner={false} color="#47a7d7" />
+        )}
         <BackToTop />
         <ImagePreloader />
         <Navigation />
@@ -114,9 +116,9 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LegalService",
-                    name: "OnlineInsurance.bg - Онлайн застраховане",
-      description:
-        "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути.",
+              name: "OnlineInsurance.bg - Онлайн застраховане",
+              description:
+                "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути.",
               url: "https://example.bg",
               contactPoint: {
                 "@type": "ContactPoint",

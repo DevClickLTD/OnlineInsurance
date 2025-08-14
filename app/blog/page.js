@@ -42,8 +42,9 @@ export default async function Blog({ searchParams }) {
                 От нашия блог
               </h1>
               <p className="mt-6 text-lg/8 text-white">
-                Открийте полезни съвети, анализи и актуални новини за застраховането,
-                които ще ви помогнат да вземете по-информирани решения за вашето бъдеще.
+                Открийте полезни съвети, анализи и актуални новини за
+                застраховането, които ще ви помогнат да вземете по-информирани
+                решения за вашето бъдеще.
               </p>
             </div>
             <svg
@@ -73,7 +74,7 @@ export default async function Blog({ searchParams }) {
           {posts.length > 0 ? (
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {posts.map((post) => (
-                <Link href={`/${post.slug}`} key={post.id} prefetch={true}>
+                <Link href={`/${post.slug}`} key={post.id}>
                   <article className="flex flex-col items-start justify-between">
                     <div className="relative w-full">
                       <Image
@@ -122,7 +123,6 @@ export default async function Blog({ searchParams }) {
               <Link
                 href={`/blog?page=${currentPage - 1}`}
                 className="px-4 py-2 mx-2 bg-gray-200 rounded-md"
-                prefetch={true}
               >
                 Предишна
               </Link>
@@ -134,7 +134,6 @@ export default async function Blog({ searchParams }) {
               <Link
                 href={`/blog?page=${currentPage + 1}`}
                 className="px-4 py-2 mx-2 bg-gray-200 rounded-md"
-                prefetch={true}
               >
                 Следваща
               </Link>

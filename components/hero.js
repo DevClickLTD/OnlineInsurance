@@ -14,7 +14,7 @@ export default function Hero() {
               src="/online-insurance.webp"
               width={640}
               height={400}
-              alt="Hero image"
+              alt="Онлайн застраховане – илюстративно изображение"
               className="w-full h-auto object-cover aspect-[4/3]"
               loading="eager"
               decoding="sync"
@@ -114,7 +114,7 @@ export default function Hero() {
               src="/online-insurance.webp"
               width={955}
               height={776}
-              alt="Hero image"
+              alt="Онлайн застраховане – илюстративно изображение"
               className="h-full w-full object-cover"
               loading="eager"
               decoding="sync"

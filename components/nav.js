@@ -150,7 +150,7 @@ export default function Navigation() {
               <div className="ml-4">
                 <Image
                   src="/logo.png"
-                  alt=""
+                  alt="OnlineInsurance.bg лого"
                   width={180}
                   height={40}
                   className="h-12 w-auto"
@@ -166,7 +166,6 @@ export default function Navigation() {
                       href={page.href}
                       className="-m-2 block p-2 font-medium text-gray-900"
                       onClick={() => setOpen(false)}
-                      prefetch={true}
                     >
                       {page.name}
                     </Link>
@@ -209,7 +208,6 @@ export default function Navigation() {
                                 href={service.href}
                                 className="-m-2 block p-2 font-medium text-gray-900"
                                 onClick={() => setOpen(false)}
-                                prefetch={true}
                               >
                                 {service.name}
                               </Link>
@@ -247,7 +245,7 @@ export default function Navigation() {
                   <Image
                     width={180}
                     height={40}
-                    alt=""
+                    alt="OnlineInsurance.bg лого"
                     src="/logo.png"
                     className="h-12 w-auto transition-all duration-300 ease-in-out"
                   />
@@ -263,7 +261,6 @@ export default function Navigation() {
                         key={page.name}
                         href={page.href}
                         className="flex items-center font-medium text-gray-700 hover:text-gray-800 text-base"
-                        prefetch={true}
                       >
                         {page.name}
                       </Link>
@@ -323,7 +320,6 @@ export default function Navigation() {
                                             <Link
                                               className="min-w-0 w-full flex"
                                               href={service.href}
-                                              prefetch={true}
                                               onClick={close}
                                             >
                                               <p className="text-lg font-semibold text-gray-900 transition-colors duration-300 hover:text-[#47a7d7]">
@@ -390,7 +386,6 @@ export default function Navigation() {
                             <Link
                               href={`/${result.type}/${result.slug}`}
                               className="block w-full h-full p-1 sm:p-2 text-gray-900 hover:text-[#47a7d7]"
-                              prefetch={true}
                             >
                               {result.title}
                             </Link>

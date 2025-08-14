@@ -73,7 +73,6 @@ export default function ServicesList({ services }) {
               }`}
               key={service.id}
               ref={(el) => setServiceRef(el, index)}
-              prefetch={index < 3} // Предварително зареждаме само първите 3 услуги
             >
               <article className="relative isolate flex flex-col gap-8 lg:flex-row w-[100%]">
                 <div className="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-64 lg:shrink-0">
@@ -90,7 +89,6 @@ export default function ServicesList({ services }) {
                       "/placeholder.webp"
                     }
                     className="absolute inset-0 size-full rounded-2xl bg-gray-50 object-cover"
-                    format="webp"
                     decoding={index === 0 ? "sync" : "async"}
                     fetchPriority={index === 0 ? "high" : "auto"}
                   />

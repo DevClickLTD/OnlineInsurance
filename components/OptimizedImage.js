@@ -70,7 +70,6 @@ export default function OptimizedImage({
       onLoad={handleLoad}
       className={className}
       style={imageStyle}
-      format="webp"
       {...props}
     />
   );

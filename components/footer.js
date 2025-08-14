@@ -13,15 +13,9 @@ const pacifico = Pacifico({
 });
 
 const navigation = {
-  solutions: [
-    { name: "Застрахователни услуги", href: "/zastrahovki" },
-  ],
-  company: [
-    { name: "Блог", href: "/blog" },
-  ],
-  legal: [
-    { name: "Политика за поверителност", href: "/privacy-policy" },
-  ],
+  solutions: [{ name: "Застрахователни услуги", href: "/zastrahovki" }],
+  company: [{ name: "Блог", href: "/blog" }],
+  legal: [{ name: "Политика за поверителност", href: "/privacy-policy" }],
   social: [
     {
       name: "Facebook",
@@ -89,7 +83,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
           <div className="lg:col-span-1 flex justify-center lg:justify-start">
-            <img alt="" src="/logo.png" width={168} height={38} className="h-18 w-auto" />
+            <img
+              alt="OnlineInsurance.bg лого"
+              src="/logo.png"
+              width={168}
+              height={38}
+              className="h-18 w-auto"
+            />
           </div>
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-12">
@@ -128,7 +128,9 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-base font-semibold text-gray-900 mb-6">Правни</h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-6">
+                  Правни
+                </h3>
                 <ul role="list" className="space-y-3">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
@@ -145,7 +147,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-                <div className="mt-12 border-t border-gray-900/10 pt-8">
+        <div className="mt-12 border-t border-gray-900/10 pt-8">
           <div className="flex flex-col items-center space-y-6 md:flex-row md:justify-between md:space-y-0">
             <p className="text-sm text-gray-600 text-center md:text-left">
               &copy; {year} OnlineInsurance.bg - Всички права запазени.
