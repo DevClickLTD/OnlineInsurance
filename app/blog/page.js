@@ -69,7 +69,11 @@ export default async function Blog({ searchParams }) {
           </div>
         </div>
       </div>
-      <div className="bg-white py-24">
+      <div
+        className="bg-white py-24"
+        role="region"
+        aria-labelledby="blog-heading"
+      >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {posts.length > 0 ? (
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -118,7 +122,7 @@ export default async function Blog({ searchParams }) {
             </p>
           )}
           {/* Pagination Controls */}
-          <div className="mt-10 flex justify-center">
+          <nav className="mt-10 flex justify-center" aria-label="Пагинация">
             {currentPage > 1 && (
               <Link
                 href={`/blog?page=${currentPage - 1}`}
@@ -138,7 +142,7 @@ export default async function Blog({ searchParams }) {
                 Следваща
               </Link>
             )}
-          </div>
+          </nav>
         </div>
       </div>
     </>

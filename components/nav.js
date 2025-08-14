@@ -125,7 +125,10 @@ export default function Navigation() {
   }, []);
 
   return (
-    <div className="bg-white sticky shadow-md top-0 block w-full z-50">
+    <div
+      className="bg-white sticky shadow-md top-0 block w-full z-50"
+      role="banner"
+    >
       {/* Mobile menu */}
       <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
         <DialogBackdrop
@@ -224,7 +227,10 @@ export default function Navigation() {
         </div>
       </Dialog>
       <header className="relative bg-white">
-        <nav aria-label="Top" className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <nav
+          aria-label="Основна навигация"
+          className="mx-auto w-full px-4 sm:px-6 lg:px-8"
+        >
           <div className="border-b border-gray-200">
             <div className="flex items-center justify-between h-16 lg:h-16">
               {/* Mobile menu button - запазваме мобилната версия непроменена */}
@@ -232,6 +238,7 @@ export default function Navigation() {
                 type="button"
                 onClick={() => setOpen(true)}
                 className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                aria-label="Отвори меню"
               >
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open menu</span>
@@ -362,13 +369,26 @@ export default function Navigation() {
                       }
                     }}
                     className="block w-full px-3 pr-10 text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#47a7d7] py-1 text-sm sm:text-base lg:text-base"
+                    role="searchbox"
+                    aria-label="Търсене в сайта"
                   />
-                  <MagnifyingGlassIcon className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 h-5 w-5" />
+                  <MagnifyingGlassIcon
+                    className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 h-5 w-5"
+                    aria-hidden="true"
+                  />
                 </div>
                 {showResults && (
-                  <div className="absolute right-0 w-44 sm:w-48 lg:w-72 mt-2 bg-white shadow-lg rounded-md max-h-48 sm:max-h-56 lg:max-h-60 overflow-y-auto border border-gray-200">
+                  <div
+                    className="absolute right-0 w-44 sm:w-48 lg:w-72 mt-2 bg-white shadow-lg rounded-md max-h-48 sm:max-h-56 lg:max-h-60 overflow-y-auto border border-gray-200"
+                    role="listbox"
+                    aria-label="Резултати от търсенето"
+                  >
                     {isSearching ? (
-                      <div className="p-2 text-gray-500 text-sm text-center">
+                      <div
+                        className="p-2 text-gray-500 text-sm text-center"
+                        role="status"
+                        aria-live="polite"
+                      >
                         Зареждане...
                       </div>
                     ) : searchResults.length > 0 ? (
@@ -386,6 +406,7 @@ export default function Navigation() {
                             <Link
                               href={`/${result.type}/${result.slug}`}
                               className="block w-full h-full p-1 sm:p-2 text-gray-900 hover:text-[#47a7d7]"
+                              role="option"
                             >
                               {result.title}
                             </Link>

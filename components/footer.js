@@ -49,7 +49,10 @@ export default function Footer() {
   }, [year]);
 
   return (
-    <footer className="relative bg-white border border-t-[#eaeaea]">
+    <footer
+      className="relative bg-white border border-t-[#eaeaea]"
+      role="contentinfo"
+    >
       <div className="absolute right-0 top-0 bottom-0 z-10 w-1/3 h-full flex items-center justify-center pointer-events-none">
         <svg
           className="absolute w-full h-full opacity-80 hidden md:block sm:viewBox-[-150_0_500_1000] md:viewBox-[-150_0_500_800] lg:viewBox-[0_0_500_800]"
@@ -93,8 +96,14 @@ export default function Footer() {
           </div>
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-12">
-              <div className="text-center sm:text-left">
-                <h3 className="text-base font-semibold text-gray-900 mb-6">
+              <nav
+                className="text-center sm:text-left"
+                aria-labelledby="footer-services"
+              >
+                <h3
+                  id="footer-services"
+                  className="text-base font-semibold text-gray-900 mb-6"
+                >
                   Услуги
                 </h3>
                 <ul role="list" className="space-y-3">
@@ -109,9 +118,15 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div className="text-center sm:text-left">
-                <h3 className="text-base font-semibold text-gray-900 mb-6">
+              </nav>
+              <nav
+                className="text-center sm:text-left"
+                aria-labelledby="footer-company"
+              >
+                <h3
+                  id="footer-company"
+                  className="text-base font-semibold text-gray-900 mb-6"
+                >
                   Компания
                 </h3>
                 <ul role="list" className="space-y-3">
@@ -126,9 +141,15 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div className="text-center sm:text-left">
-                <h3 className="text-base font-semibold text-gray-900 mb-6">
+              </nav>
+              <nav
+                className="text-center sm:text-left"
+                aria-labelledby="footer-legal"
+              >
+                <h3
+                  id="footer-legal"
+                  className="text-base font-semibold text-gray-900 mb-6"
+                >
                   Правни
                 </h3>
                 <ul role="list" className="space-y-3">
@@ -143,7 +164,7 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </nav>
             </div>
           </div>
         </div>
@@ -160,6 +181,7 @@ export default function Footer() {
                   target={item.target}
                   rel={item.rel}
                   className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                  aria-label={item.name}
                 >
                   <span className="sr-only">{item.name}</span>
                   <item.icon aria-hidden="true" className="size-6" />

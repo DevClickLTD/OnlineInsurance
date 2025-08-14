@@ -99,13 +99,19 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={roboto.className}>
+        <a
+          href="#content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:p-2"
+        >
+          Пропусни към съдържанието
+        </a>
         {process.env.NODE_ENV !== "production" && (
           <NextTopLoader showSpinner={false} color="#47a7d7" />
         )}
         <BackToTop />
         <ImagePreloader />
         <Navigation />
-        <main>{children}</main>
+        <main id="content">{children}</main>
         <CookieConsentBanner />
         <Footer />
         <Script
