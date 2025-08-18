@@ -345,9 +345,11 @@ export default function Navigation({ initialServices }) {
                                           <Image
                                             width={560}
                                             height={560}
-                                            alt=""
-                                            src="/insurance.webp"
+                                            alt="Застрахователни услуги"
+                                            src="/insurance.jpg"
                                             className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
+                                            loading="lazy"
+                                            decoding="async"
                                           />
                                         </div>
                                       </div>
