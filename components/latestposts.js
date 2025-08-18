@@ -26,14 +26,18 @@ export default async function LatestPosts() {
                     <article className="flex flex-col items-start justify-between">
                       <div className="relative w-full">
                         <Image
-                          width={400}
-                          height={225}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          width={453}
+                          height={302}
+                          sizes="453px"
                           quality={85}
                           priority={index === 0}
                           loading={index === 0 ? "eager" : "lazy"}
+                          unoptimized
                           alt={post.title.rendered || "Публикация"}
                           src={
+                            post?._embedded?.["wp:featuredmedia"]?.[0]
+                              ?.media_details?.sizes?.["index-posts-size"]
+                              ?.source_url ||
                             post.yoast_head_json?.og_image?.[0]?.url ||
                             "/placeholder.webp"
                           }
