@@ -344,9 +344,11 @@ export default function Navigation({ initialServices }) {
                                         <div className="group relative text-base sm:text-sm">
                                           <Image
                                             width={560}
-                                            height={560}
+                                            height={374}
                                             alt="Застрахователни услуги"
                                             src="/insurance.jpg"
+                                            sizes="(min-width: 1024px) 560px, 100vw"
+                                            quality={80}
                                             className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                             loading="lazy"
                                             decoding="async"

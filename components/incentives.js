@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const incentives = [
   {
     name: "Бързо и лесно",
@@ -37,12 +39,17 @@ export default function Incentives() {
                 към вашите нужди.
               </p>
             </div>
-            <img
+            <Image
               alt="Застрахователни услуги"
               src="/insurance.jpg"
-              className="aspect-3/2 w-full rounded-lg bg-gray-100 object-cover"
+              width={560}
+              height={374}
+              sizes="(min-width: 1024px) 560px, 100vw"
+              quality={80}
+              className="w-full rounded-lg bg-gray-100 object-cover"
               loading="lazy"
               decoding="async"
+              priority={false}
             />
           </div>
           <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">

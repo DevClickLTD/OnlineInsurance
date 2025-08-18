@@ -12,16 +12,14 @@ export default function Hero() {
             {/* Директно използване на HTML img за максимална производителност на LCP */}
             <img
               src="/online-insurance.webp"
-              width={640}
+              width={581}
               height={400}
               alt="Онлайн застраховане – илюстративно изображение"
-              className="w-full h-auto object-cover aspect-[4/3]"
+              className="w-full h-auto object-cover"
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{
-                objectFit: "cover",
-              }}
+              style={{ objectFit: "cover" }}
               id="hero-mobile-lcp"
             />
           </div>
