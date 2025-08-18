@@ -1,10 +1,10 @@
 import Link from "next/link";
-import LazyImageObserver from "./LazyImageObserver";
+// import LazyImageObserver from "./LazyImageObserver";
 
 export default function Hero() {
   return (
     <>
-      <LazyImageObserver />
+      {/* LazyImageObserver temporarily disabled to minimize JS before LCP */}
       <div className="bg-white">
         {/* Мобилен Hero с изображение най-отгоре - ще бъде LCP елемент за мобилни */}
         <div className="lg:hidden relative">

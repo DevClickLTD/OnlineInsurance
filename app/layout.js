@@ -96,19 +96,6 @@ export default async function RootLayout({ children }) {
           as="image"
           href="/online-insurance.webp"
           type="image/webp"
-          media="(max-width: 640px)"
-          imagesrcset="/online-insurance.webp 1x"
-          imagesizes="(max-width: 640px) 100vw"
-        />
-
-        <link
-          rel="preload"
-          as="image"
-          href="/online-insurance.webp"
-          type="image/webp"
-          media="(min-width: 641px)"
-          imagesrcset="/online-insurance.webp 1x"
-          imagesizes="(min-width: 641px) 50vw"
         />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
