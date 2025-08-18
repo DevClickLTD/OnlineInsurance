@@ -4,6 +4,7 @@ import { getServices } from "../../services/services";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
+import { getFirstExistingPageBySlugs } from "../../services/pages";
 
 // Динамично зареждане на компонента със списъка с услуги
 const ServicesList = dynamic(() => import("../../components/ServicesList"), {
@@ -16,24 +17,46 @@ const ServicesList = dynamic(() => import("../../components/ServicesList"), {
 // Добавяне на ISR ревалидиране на всеки час
 export const revalidate = 3600;
 
-export const metadata = {
-  title: "Услуги - OnlineInsurance.bg",
-  description:
-    "Разгледайте всички наши професионални услуги, които предлагаме за бизнеса. Открийте как можем да помогнем на вашия бизнес да расте и да се развива.",
-  keywords: ["застрахователни услуги", "автомобилно застраховане", "здравно застраховане", "имущество", "OnlineInsurance"],
-  openGraph: {
-    title: "Застрахователни Услуги | OnlineInsurance.bg",
-    description: "Разгледайте всички наши професионални услуги",
-    images: [
-      {
-        url: "/zastrahovki-og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "OnlineInsurance.bg - Застрахователни услуги",
-      },
-    ],
-  },
-};
+export async function generateMetadata() {
+  const page = await getFirstExistingPageBySlugs([
+    "zastrahovki",
+    "застраховки",
+    "services",
+  ]);
+  const meta = page?.yoast_head_json;
+  const title = meta?.title || "Услуги - OnlineInsurance.bg";
+  const description = meta?.description || meta?.og_description || "";
+  const ogImage = meta?.og_image?.[0]?.url;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: meta?.canonical || "/zastrahovki",
+      languages: { bg: meta?.canonical || "/zastrahovki" },
+    },
+    openGraph: {
+      title: meta?.og_title || title,
+      description: meta?.og_description || description,
+      images: ogImage
+        ? [{ url: ogImage, width: 1200, height: 630, alt: title }]
+        : [
+            {
+              url: "/online-insurance.webp",
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage ? [ogImage] : ["/online-insurance.webp"],
+    },
+  };
+}
 
 export default async function Services() {
   try {
@@ -57,14 +80,14 @@ export default async function Services() {
         item: {
           "@type": "Service",
           name: service.title.rendered,
-          url: `https://example.bg/zastrahovki/${service.slug}`,
+          url: `https://onlineinsurance.bg/zastrahovki/${service.slug}`,
           description:
             service.content.rendered.replace(/<[^>]+>/g, "").substring(0, 150) +
             "...",
           provider: {
             "@type": "Organization",
             name: "OnlineInsurance.bg",
-            url: "https://example.bg",
+            url: "https://onlineinsurance.bg",
           },
         },
       })),

@@ -5,7 +5,7 @@ import { fetchAPI } from "../services/api";
 async function getAllPosts() {
   try {
     return await fetchAPI(
-      "posts?_fields=id,slug,date&per_page=100&status=publish"
+      "posts?_fields=id,slug,date,modified,yoast_head_json&per_page=100&status=publish"
     );
   } catch (error) {
     console.error("Error fetching posts for sitemap:", error);
@@ -52,26 +52,34 @@ export default async function sitemap() {
     ];
 
     // Dynamic service routes
-    const serviceRoutes = services?.map((service) => ({
-      url: `${baseUrl}/zastrahovki/${service.slug}`,
-      lastModified: new Date(service.date || new Date()),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    })) || [];
+    const serviceRoutes =
+      services
+        ?.filter((s) => s?.yoast_head_json?.robots?.index !== "noindex")
+        .map((service) => ({
+          url: `${baseUrl}/zastrahovki/${service.slug}`,
+          lastModified: new Date(
+            service.modified || service.date || new Date()
+          ),
+          changeFrequency: "weekly",
+          priority: 0.7,
+        })) || [];
 
     // Dynamic blog post routes
-    const postRoutes = posts?.map((post) => ({
-      url: `${baseUrl}/${post.slug}`,
-      lastModified: new Date(post.date || new Date()),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    })) || [];
+    const postRoutes =
+      posts
+        ?.filter((p) => p?.yoast_head_json?.robots?.index !== "noindex")
+        .map((post) => ({
+          url: `${baseUrl}/${post.slug}`,
+          lastModified: new Date(post.modified || post.date || new Date()),
+          changeFrequency: "monthly",
+          priority: 0.6,
+        })) || [];
 
     // Combine all routes
     return [...staticRoutes, ...serviceRoutes, ...postRoutes];
   } catch (error) {
     console.error("Error generating sitemap:", error);
-    
+
     // Fallback to static routes only
     return [
       {

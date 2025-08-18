@@ -1,6 +1,31 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "geolocation=(), microphone=(), camera=()",
+          },
+        ],
+      },
+      {
+        source: "/:all*(js|css|png|jpg|jpeg|gif|webp|avif|svg)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
@@ -25,7 +50,10 @@ const nextConfig = {
   poweredByHeader: false, // Премахваме X-Powered-By хедъра
   reactStrictMode: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production", // Премахваме console.log в production
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false, // Премахваме console.log в production, пазим warn/error
   },
 };
 

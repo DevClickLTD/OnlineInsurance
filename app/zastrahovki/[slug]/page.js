@@ -29,31 +29,47 @@ export async function generateMetadata({ params }) {
   const ogImage =
     meta.og_image && meta.og_image.length > 0 ? meta.og_image[0].url : "";
 
+  const safeTitle = meta.title?.slice(0, 60);
+  const safeDescription = (meta.description || meta.og_description || "")
+    .replace(/\s+/g, " ")
+    .slice(0, 155);
+
   return {
-    title: meta.title,
-    description: meta.description,
+    title: safeTitle,
+    description: safeDescription,
     keywords: meta.keywords || [
       "услуги",
       "професионални услуги",
       slug.replace(/-/g, " "),
     ],
     openGraph: {
-      title: meta.og_title,
-      description: meta.og_description,
+      title: meta.og_title || safeTitle,
+      description: meta.og_description || safeDescription,
       images: ogImage
-        ? [
+        ? [{ url: ogImage, width: 1200, height: 630, alt: safeTitle }]
+        : [
             {
-              url: ogImage,
+              url: "/online-insurance.webp",
               width: 1200,
               height: 630,
-              alt: meta.title,
+              alt: safeTitle,
             },
-          ]
-        : [],
+          ],
       type: "article",
     },
+    robots: {
+      index: meta?.robots?.index !== "noindex",
+      follow: meta?.robots?.follow !== "nofollow",
+      googleBot: {
+        index: meta?.robots?.index !== "noindex",
+        follow: meta?.robots?.follow !== "nofollow",
+        "max-snippet": meta?.robots?.["max-snippet"] ?? -1,
+        "max-image-preview": meta?.robots?.["max-image-preview"] ?? "large",
+        "max-video-preview": meta?.robots?.["max-video-preview"] ?? -1,
+      },
+    },
     alternates: {
-      canonical: meta.canonical,
+      canonical: meta.canonical || `/zastrahovki/${slug}`,
     },
   };
 }
@@ -79,20 +95,44 @@ export default async function ServicePage({ params }) {
       description:
         service[0].content.rendered.replace(/<[^>]+>/g, "").substring(0, 200) +
         "...",
-      url: meta.canonical || `https://example.bg/zastrahovki/${slug}`,
+      url: meta.canonical || `https://onlineinsurance.bg/zastrahovki/${slug}`,
       provider: {
         "@type": "Organization",
         name: "OnlineInsurance.bg",
-        url: "https://example.bg",
-        logo: "https://example.bg/logo.png",
+        url: "https://onlineinsurance.bg",
+        logo: "https://onlineinsurance.bg/logo.png",
       },
-      image: ogImage || "https://example.bg/placeholder.webp",
+      image: ogImage || "https://onlineinsurance.bg/placeholder.webp",
+      serviceType: service[0]?.title?.rendered || undefined,
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: "Bulgaria",
+      },
       offers: {
         "@type": "Offer",
         price: "Свържете се с нас за цена",
         priceCurrency: "BGN",
       },
     };
+
+    // Ако имаме често задавани въпроси във WP съдържанието (маркирани с h3/strong), генерираме FAQPage
+    const faqMatches = (service[0].content.rendered || "").match(
+      /<h3[^>]*>(.*?)<\/h3>\s*<p[^>]*>(.*?)<\/p>/gis
+    );
+    const faqs = faqMatches
+      ? faqMatches.map((block) => {
+          const q = (block.match(/<h3[^>]*>(.*?)<\/h3>/i) || [])[1] || "";
+          const a = (block.match(/<p[^>]*>([\s\S]*?)<\/p>/i) || [])[1] || "";
+          return {
+            "@type": "Question",
+            name: q.replace(/<[^>]+>/g, " ").trim(),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: a.trim(),
+            },
+          };
+        })
+      : [];
 
     return (
       <>
@@ -103,6 +143,54 @@ export default async function ServicePage({ params }) {
             __html: JSON.stringify(serviceSchemaData),
           }}
         />
+
+        {/* Breadcrumbs structured data */}
+        <Script
+          id="breadcrumbs-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Начало",
+                  item: "https://onlineinsurance.bg/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Застраховки",
+                  item: "https://onlineinsurance.bg/zastrahovki",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: service[0].title.rendered,
+                  item:
+                    meta.canonical ||
+                    `https://onlineinsurance.bg/zastrahovki/${slug}`,
+                },
+              ],
+            }),
+          }}
+        />
+
+        {faqs.length > 0 && (
+          <Script
+            id="faq-schema"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqs,
+              }),
+            }}
+          />
+        )}
 
         <div className="bg-white">
           <div className="mx-auto max-w-10/10 py-0 sm:px-6 sm:py-0 lg:px-0">
@@ -134,6 +222,24 @@ export default async function ServicePage({ params }) {
         </div>
         <div className="bg-white py-12 sm:py-12">
           <div className="mx-auto w-full">
+            <nav
+              className="mx-auto max-w-8xl w-full mb-6 text-sm text-gray-600 px-6 lg:px-8"
+              aria-label="Breadcrumb"
+            >
+              <ol className="flex space-x-2">
+                <li>
+                  <a href="/">Начало</a>
+                </li>
+                <li>/</li>
+                <li>
+                  <a href="/zastrahovki">Застраховки</a>
+                </li>
+                <li>/</li>
+                <li aria-current="page" className="text-gray-900">
+                  {service[0].title.rendered}
+                </li>
+              </ol>
+            </nav>
             <Suspense
               fallback={
                 <div className="animate-pulse h-96 bg-gray-100 rounded-md"></div>

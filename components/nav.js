@@ -21,9 +21,8 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
 import { getServicesNav } from "../services/services";
-import { searchContent } from "../services/search";
 
-export default function Navigation() {
+export default function Navigation({ initialServices }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -47,13 +46,48 @@ export default function Navigation() {
   });
 
   useEffect(() => {
+    if (
+      initialServices &&
+      Array.isArray(initialServices) &&
+      initialServices.length > 0
+    ) {
+      const featured = initialServices.slice(0, 2);
+      const remainingServices = initialServices.slice(2);
+      setNavigation((prev) => ({
+        ...prev,
+        categories: [
+          {
+            id: "categories",
+            name: "Застраховки",
+            featured: featured.map((service) => ({
+              name: service.title.rendered,
+              href: `/zastrahovki/${service.slug}`,
+              imageSrc:
+                service.yoast_head_json?.og_image?.[0]?.url ||
+                "/placeholder.webp",
+              imageAlt: service.title.rendered,
+            })),
+            services: remainingServices.map((service) => ({
+              id: service.id,
+              name: service.title.rendered,
+              href: `/zastrahovki/${service.slug}`,
+            })),
+          },
+        ],
+      }));
+      setLoading(false);
+      return;
+    }
+    let isMounted = true;
     const fetchData = async () => {
       try {
         setLoading(true);
         const services = await getServicesNav();
 
+        if (!isMounted) return;
         if (!services || !Array.isArray(services) || services.length === 0) {
           console.warn("No services found from API");
+          setLoading(false);
           return;
         }
 
@@ -89,6 +123,9 @@ export default function Navigation() {
     };
 
     fetchData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -97,12 +134,11 @@ export default function Navigation() {
       return;
     }
 
-    console.log(searchQuery);
-
     setIsSearching(true);
     setShowResults(true);
 
     const delayDebounceFn = setTimeout(async () => {
+      const { searchContent } = await import("../services/search");
       const results = await searchContent(searchQuery);
       setSearchResults(results);
       setIsSearching(false);

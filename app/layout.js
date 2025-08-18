@@ -6,6 +6,7 @@ import Script from "next/script";
 import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
 import BackToTop from "../components/BackToTop";
+import { getServicesNav } from "../services/services";
 import NextTopLoader from "nextjs-toploader";
 import "../styles/globals.css";
 import { Roboto } from "next/font/google";
@@ -67,7 +68,8 @@ export async function generateMetadata() {
   };
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const servicesForNav = await getServicesNav().catch(() => []);
   return (
     <html lang="bg">
       <head>
@@ -78,6 +80,15 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <link rel="dns-prefetch" href="https://onlineinsurance.bg" />
+        <link
+          rel="preconnect"
+          href="https://onlineinsurance.admin-panels.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="dns-prefetch"
+          href="https://onlineinsurance.admin-panels.com"
+        />
 
         {/* Директно използване на preload тагове с правилния синтаксис */}
         <link
@@ -110,7 +121,7 @@ export default function RootLayout({ children }) {
         )}
         <BackToTop />
         <ImagePreloader />
-        <Navigation />
+        <Navigation initialServices={servicesForNav} />
         <main id="content">{children}</main>
         <CookieConsentBanner />
         <Footer />
@@ -121,23 +132,36 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LegalService",
-              name: "OnlineInsurance.bg - Онлайн застраховане",
-              description:
-                "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути.",
-              url: "https://example.bg",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+359XXXXXXXXX",
-                contactType: "customer service",
-              },
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Example Street 123",
-                addressLocality: "София",
-                postalCode: "1000",
-                addressCountry: "BG",
-              },
+              "@graph": [
+                {
+                  "@type": "InsuranceAgency",
+                  name: "OnlineInsurance.bg",
+                  url: "https://onlineinsurance.bg",
+                  logo: "https://onlineinsurance.bg/logo.png",
+                  contactPoint: [
+                    {
+                      "@type": "ContactPoint",
+                      telephone: "+359 889 336 636",
+                      contactType: "customer service",
+                    },
+                  ],
+                  sameAs: [
+                    "https://www.facebook.com/onlineinsurance.bg",
+                    "https://www.linkedin.com/company/onlineinsurance-bg",
+                  ],
+                },
+                {
+                  "@type": "WebSite",
+                  name: "OnlineInsurance.bg",
+                  url: "https://onlineinsurance.bg",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target:
+                      "https://onlineinsurance.bg/blog?page=1&q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
+                },
+              ],
             }),
           }}
         />

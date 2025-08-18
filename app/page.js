@@ -1,6 +1,7 @@
 import HeroSection from "../components/hero";
 import { WebVitals } from "./web-vitals";
 import dynamic from "next/dynamic";
+import { getFirstExistingPageBySlugs } from "../services/pages";
 
 // Динамично зареждане на компоненти с lazy loading
 const Incentives = dynamic(() => import("../components/incentives"), {
@@ -15,41 +16,49 @@ const Lastestposts = dynamic(() => import("../components/latestposts"), {
 // Добавяне на ISR ревалидиране на всеки час
 export const revalidate = 3600;
 
-// Добавяне на метаданни за главната страница
-export const metadata = {
-  title: "OnlineInsurance.bg - Онлайн застрахователни услуги",
-  description:
-    "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути и се насладете на сигурността, която заслужавате.",
-  keywords: [
-    "автомобилно застраховане",
-    "имуществено застраховане",
-    "здравно застраховане",
-    "животозастраховане",
-    "онлайн застраховки",
-    "застрахователни услуги",
-    "България",
-  ],
-  openGraph: {
-    title: "OnlineInsurance.bg - Онлайн застрахователни услуги",
-    description: "Най-добрите застрахователни решения за вас и вашето семейство",
-    images: [
-      {
-        url: "/online-insurance.webp",
-        width: 1200,
-        height: 630,
-        alt: "OnlineInsurance.bg - Застрахователни услуги",
-      },
-    ],
-    locale: "bg_BG",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "OnlineInsurance.bg - Онлайн застрахователни услуги",
-    description: "Най-добрите застрахователни решения за вас и вашето семейство",
-    images: ["/online-insurance.webp"],
-  },
-};
+export async function generateMetadata() {
+  const page = await getFirstExistingPageBySlugs([
+    "home",
+    "начало",
+    "homepage",
+    "front-page",
+    "index",
+  ]);
+
+  const meta = page?.yoast_head_json;
+  const ogImage = meta?.og_image?.[0]?.url;
+  const title = meta?.title || "OnlineInsurance.bg";
+  const description = meta?.description || meta?.og_description || "";
+
+  return {
+    title,
+    description,
+    robots: meta?.robots
+      ? {
+          index: meta.robots.index !== "noindex",
+          follow: meta.robots.follow !== "nofollow",
+        }
+      : undefined,
+    alternates: {
+      canonical: meta?.canonical || "/",
+    },
+    openGraph: {
+      title: meta?.og_title || title,
+      description: meta?.og_description || description,
+      images: ogImage
+        ? [{ url: ogImage, width: 1200, height: 630 }]
+        : [{ url: "/online-insurance.webp", width: 1200, height: 630 }],
+      type: "website",
+      locale: "bg_BG",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage ? [ogImage] : ["/online-insurance.webp"],
+    },
+  };
+}
 
 export default function Home() {
   return (

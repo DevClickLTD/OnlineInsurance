@@ -1,25 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { getLatestPosts } from "../services/posts";
 import Link from "next/link";
 import Image from "next/image";
+import { getLatestPosts } from "../services/posts";
 
-export default function LatestPosts() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch latests posts from WordPress API on component mount
-  useEffect(() => {
-    setLoading(true);
-    const fetchLatestPosts = async () => {
-      const postsData = await getLatestPosts();
-      setPosts(postsData);
-      setLoading(false);
-    };
-
-    fetchLatestPosts();
-  }, []);
+export default async function LatestPosts() {
+  const posts = (await getLatestPosts()) || [];
+  const loading = false;
 
   return (
     <div className="bg-white">
@@ -59,7 +44,7 @@ export default function LatestPosts() {
                       <div className="max-w-xl">
                         <div className="mt-8 flex items-center gap-x-4 text-xs">
                           <time dateTime={post.date} className="text-white">
-                            {new Date(post.date).toLocaleDateString()}
+                            {new Date(post.date).toISOString().slice(0, 10)}
                           </time>
                         </div>
                         <div className="group relative text-left">

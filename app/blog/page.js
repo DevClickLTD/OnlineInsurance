@@ -1,14 +1,60 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Блог - OnlineInsurance.bg",
-  description:
-    "Открийте полезни съвети и актуална информация за застраховане, финанси и опазване на вашия дом и семейство.",
-};
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const page = params?.page;
+  const currentPage = parseInt(page) || 1;
+  const canonical = currentPage > 1 ? `/blog?page=${currentPage}` : "/blog";
+
+  // Pull Yoast for blog listing page if exists in WP
+  let title = "Блог - OnlineInsurance.bg";
+  let description =
+    "Открийте полезни съвети и актуална информация за застраховане, финанси и опазване на вашия дом и семейство.";
+
+  try {
+    const yoast = await fetch(
+      "https://onlineinsurance.admin-panels.com/wp-json/wp/v2/pages?slug=blog&_fields=yoast_head_json",
+      { next: { revalidate: 300 } }
+    ).then((r) => r.json());
+    const meta = yoast?.[0]?.yoast_head_json;
+    if (meta) {
+      title = meta.title || title;
+      description = meta.description || meta.og_description || description;
+    }
+  } catch {}
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: { bg: canonical },
+    },
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: "/online-insurance.webp",
+          width: 1200,
+          height: 630,
+          alt: "OnlineInsurance.bg",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/online-insurance.webp"],
+    },
+  };
+}
 
 export default async function Blog({ searchParams }) {
-  const page = (await searchParams).page;
+  const params = await searchParams;
+  const page = params?.page;
   const currentPage = parseInt(page) || 1;
   const perPage = 9;
 
@@ -38,7 +84,10 @@ export default async function Blog({ searchParams }) {
         <div className="mx-auto max-w-10/10 py-0 sm:px-6 sm:py-0 lg:px-0">
           <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-12 text-center shadow-2xl sm:px-12">
             <div className="mx-auto max-w-2xl text-center">
-              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              <h1
+                id="blog-heading"
+                className="text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+              >
                 От нашия блог
               </h1>
               <p className="mt-6 text-lg/8 text-white">
@@ -84,7 +133,7 @@ export default async function Blog({ searchParams }) {
                       <Image
                         width={380}
                         height={250}
-                        alt=""
+                        alt={post.title?.rendered || "Публикация"}
                         src={
                           post.yoast_head_json?.og_image?.[0]?.url ||
                           "/placeholder.webp"
@@ -96,7 +145,7 @@ export default async function Blog({ searchParams }) {
                     <div className="max-w-xl">
                       <div className="mt-8 flex items-center gap-x-4 text-xs">
                         <time dateTime={post.date} className="text-gray-500">
-                          {new Date(post.date).toLocaleDateString()}
+                          {new Date(post.date).toISOString().slice(0, 10)}
                         </time>
                       </div>
                       <div className="group relative">

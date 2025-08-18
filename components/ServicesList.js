@@ -97,7 +97,7 @@ export default function ServicesList({ services }) {
                 <div className="flex flex-col w-full">
                   <div className="flex items-center gap-x-4 text-xs">
                     <time dateTime={service.date} className="text-gray-500">
-                      {new Date(service.date).toLocaleDateString()}
+                      {new Date(service.date).toISOString().slice(0, 10)}
                     </time>
                   </div>
                   <div className="group relative max-w-[100%]">

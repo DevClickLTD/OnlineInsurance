@@ -1,22 +1,40 @@
+import { getFirstExistingPageBySlugs } from "../../services/pages";
 
 export async function generateMetadata() {
+  const page = await getFirstExistingPageBySlugs([
+    "privacy-policy",
+    "privacy",
+    "политика-за-поверителност",
+  ]);
+  const meta = page?.yoast_head_json;
+  const title = meta?.title || "Политика за поверителност - OnlineInsurance.bg";
+  const description = meta?.description || meta?.og_description || "";
+  const ogImage = meta?.og_image?.[0]?.url;
+
   return {
-    title: "Политика за поверителност - OnlineInsurance.bg",
-    description:
-      "Научете повече за нашата политика за поверителност и как обработваме вашите лични данни.",
+    title,
+    description,
+    alternates: {
+      canonical: meta?.canonical || "/privacy-policy",
+    },
+    openGraph: {
+      title: meta?.og_title || title,
+      description: meta?.og_description || description,
+      images: ogImage ? [{ url: ogImage }] : undefined,
+    },
   };
 }
 
 export default async function PrivacyPolicy() {
-
   return (
     <div className="container mx-auto p-6 max-w-5xl bg-white py-12">
       <h1 className="text-3xl font-bold mb-4 text-gray-800 border-b pb-2">
         Политика за поверителност
       </h1>
       <p className="mb-4 text-gray-700">
-        Настоящата Политика за поверителност описва как OnlineInsurance.bg събира,
-        използва и защитава личните данни на потребителите на нашия уебсайт.
+        Настоящата Политика за поверителност описва как OnlineInsurance.bg
+        събира, използва и защитава личните данни на потребителите на нашия
+        уебсайт.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 text-gray-900">
