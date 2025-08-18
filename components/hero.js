@@ -17,12 +17,10 @@ export default function Hero() {
               alt="Онлайн застраховане – илюстративно изображение"
               className="w-full h-auto object-cover aspect-[4/3]"
               loading="eager"
-              decoding="sync"
+              decoding="async"
               fetchPriority="high"
               style={{
                 objectFit: "cover",
-                contentVisibility: "auto",
-                containIntrinsicSize: "640px 400px",
               }}
               id="hero-mobile-lcp"
             />
@@ -117,13 +115,9 @@ export default function Hero() {
               alt="Онлайн застраховане – илюстративно изображение"
               className="h-full w-full object-cover"
               loading="eager"
-              decoding="sync"
+              decoding="async"
               fetchPriority="high"
-              style={{
-                objectFit: "cover",
-                contentVisibility: "auto",
-                containIntrinsicSize: "955px 776px",
-              }}
+              style={{ objectFit: "cover" }}
               id="hero-desktop-lcp"
             />
           </div>
