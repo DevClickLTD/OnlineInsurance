@@ -16,16 +16,7 @@ export default function Clients() {
               покритие и конкурентни цени за всички наши клиенти.
             </p>
           </div>
-          <div className="mx-auto grid w-full max-w-xl grid-cols-1 sm:grid-cols-2 items-center gap-x-8 gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8">
-            <Image
-              alt="vinetka.bg"
-              src="/partners/vinetka.avif"
-              width={200}
-              height={80}
-              quality={80}
-              loading="lazy"
-              className="h-16 w-auto object-contain object-center"
-            />
+          <div className="mx-auto grid w-full max-w-xl grid-cols-1 items-center gap-x-8 gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8">
             <Image
               alt="insurance.bg"
               src="/partners/Insurancebg-logo.svg"
