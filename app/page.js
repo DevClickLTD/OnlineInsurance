@@ -40,7 +40,8 @@ export async function generateMetadata() {
         }
       : undefined,
     alternates: {
-      canonical: meta?.canonical || "/",
+      // Не използваме meta.canonical от Yoast - сочи към WordPress бекенда.
+      canonical: "/",
     },
     openGraph: {
       title: meta?.og_title || title,

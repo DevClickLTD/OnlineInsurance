@@ -1,5 +1,6 @@
 import { getServices } from "../services/services";
 import { fetchAPI } from "../services/api";
+import { SITE_URL } from "../services/seo";
 
 // Get all posts for sitemap
 async function getAllPosts() {
@@ -14,7 +15,7 @@ async function getAllPosts() {
 }
 
 export default async function sitemap() {
-  const baseUrl = "https://onlineinsurance.bg";
+  const baseUrl = SITE_URL;
 
   try {
     // Fetch all services and posts

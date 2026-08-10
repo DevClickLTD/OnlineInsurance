@@ -1,3 +1,5 @@
+import { SITE_URL } from "../services/seo";
+
 export default function robots() {
   return {
     rules: [
@@ -17,7 +19,7 @@ export default function robots() {
         ],
       },
     ],
-    sitemap: "https://onlineinsurance.bg/sitemap.xml",
-    host: "https://onlineinsurance.bg",
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

@@ -1,11 +1,13 @@
+import { notFound } from "next/navigation";
 import { getPostBySlug } from "../../services/posts";
+import { absoluteUrl } from "../../services/seo";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post || post.length === 0) {
-    throw new Error("Post not found");
+    notFound();
   }
 
   const meta = post[0].yoast_head_json;
@@ -39,20 +41,22 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: meta.canonical || `/${slug}`,
+      // ВАЖНО: Не използваме meta.canonical от Yoast - той сочи към
+      // WordPress бекенда (admin-panels.com) и вади страницата от индекса.
+      canonical: `/${slug}`,
     },
   };
 }
 
 export default async function PostPage({ params }) {
-  try {
-    const { slug } = await params;
-    const post = await getPostBySlug(slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
-    if (!post || post.length === 0) {
-      throw new Error("Post not found");
-    }
+  if (!post || post.length === 0) {
+    notFound();
+  }
 
+  {
     const meta = post[0].yoast_head_json;
     const ogImage =
       meta.og_image && meta.og_image.length > 0 ? meta.og_image[0].url : "";
@@ -145,21 +149,19 @@ export default async function PostPage({ params }) {
                         "@type": "ListItem",
                         position: 1,
                         name: "Начало",
-                        item: "https://onlineinsurance.bg/",
+                        item: absoluteUrl("/"),
                       },
                       {
                         "@type": "ListItem",
                         position: 2,
                         name: "Блог",
-                        item: "https://onlineinsurance.bg/blog",
+                        item: absoluteUrl("/blog"),
                       },
                       {
                         "@type": "ListItem",
                         position: 3,
                         name: post[0].title.rendered,
-                        item:
-                          meta?.canonical ||
-                          `https://onlineinsurance.bg/${post[0].slug}`,
+                        item: absoluteUrl(`/${post[0].slug}`),
                       },
                     ],
                   }),
@@ -183,9 +185,7 @@ export default async function PostPage({ params }) {
                       meta?.schema?.["@graph"]?.find(
                         (n) => n["@type"] === "Person"
                       )?.name || "OnlineInsurance.bg",
-                    mainEntityOfPage:
-                      meta?.canonical ||
-                      `https://onlineinsurance.bg/${post[0].slug}`,
+                    mainEntityOfPage: absoluteUrl(`/${post[0].slug}`),
                     description:
                       meta?.og_description || meta?.description || "",
                     publisher: {
@@ -193,7 +193,7 @@ export default async function PostPage({ params }) {
                       name: "OnlineInsurance.bg",
                       logo: {
                         "@type": "ImageObject",
-                        url: "https://onlineinsurance.bg/logo.png",
+                        url: absoluteUrl("/logo.png"),
                       },
                     },
                   }),
@@ -229,7 +229,5 @@ export default async function PostPage({ params }) {
         </div>
       </>
     );
-  } catch (error) {
-    return <p>Error: {error.message}</p>;
   }
 }

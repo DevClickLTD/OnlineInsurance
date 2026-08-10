@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { getFirstExistingPageBySlugs } from "../../services/pages";
+import { absoluteUrl } from "../../services/seo";
 
 // Динамично зареждане на компонента със списъка с услуги
 const ServicesList = dynamic(() => import("../../components/ServicesList"), {
@@ -32,8 +33,9 @@ export async function generateMetadata() {
     title,
     description,
     alternates: {
-      canonical: meta?.canonical || "/zastrahovki",
-      languages: { bg: meta?.canonical || "/zastrahovki" },
+      // Не използваме meta.canonical от Yoast - сочи към WordPress бекенда.
+      canonical: "/zastrahovki",
+      languages: { bg: "/zastrahovki" },
     },
     openGraph: {
       title: meta?.og_title || title,
@@ -80,14 +82,14 @@ export default async function Services() {
         item: {
           "@type": "Service",
           name: service.title.rendered,
-          url: `https://onlineinsurance.bg/zastrahovki/${service.slug}`,
+          url: absoluteUrl(`/zastrahovki/${service.slug}`),
           description:
             service.content.rendered.replace(/<[^>]+>/g, "").substring(0, 150) +
             "...",
           provider: {
             "@type": "Organization",
             name: "OnlineInsurance.bg",
-            url: "https://onlineinsurance.bg",
+            url: absoluteUrl("/"),
           },
         },
       })),

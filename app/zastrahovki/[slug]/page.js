@@ -1,4 +1,6 @@
+import { notFound } from "next/navigation";
 import { getServiceBySlug } from "../../../services/services";
+import { absoluteUrl } from "../../../services/seo";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }) {
   const service = await getServiceBySlug(slug);
 
   if (!service || service.length === 0) {
-    throw new Error("Service not found");
+    notFound();
   }
 
   const meta = service[0].yoast_head_json;
@@ -69,19 +71,22 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: meta.canonical || `/zastrahovki/${slug}`,
+      // ВАЖНО: Не използваме meta.canonical от Yoast - той сочи към
+      // WordPress бекенда (admin-panels.com) и вади страницата от индекса.
+      canonical: `/zastrahovki/${slug}`,
     },
   };
 }
 
 export default async function ServicePage({ params }) {
-  try {
-    const { slug } = await params;
-    const service = await getServiceBySlug(slug);
+  const { slug } = await params;
+  const service = await getServiceBySlug(slug);
 
-    if (!service || service.length === 0) {
-      throw new Error("Service not found");
-    }
+  if (!service || service.length === 0) {
+    notFound();
+  }
+
+  {
 
     const meta = service[0].yoast_head_json;
     const ogImage =
@@ -95,14 +100,14 @@ export default async function ServicePage({ params }) {
       description:
         service[0].content.rendered.replace(/<[^>]+>/g, "").substring(0, 200) +
         "...",
-      url: meta.canonical || `https://onlineinsurance.bg/zastrahovki/${slug}`,
+      url: absoluteUrl(`/zastrahovki/${slug}`),
       provider: {
         "@type": "Organization",
         name: "OnlineInsurance.bg",
-        url: "https://onlineinsurance.bg",
-        logo: "https://onlineinsurance.bg/logo.png",
+        url: absoluteUrl("/"),
+        logo: absoluteUrl("/logo.png"),
       },
-      image: ogImage || "https://onlineinsurance.bg/placeholder.webp",
+      image: ogImage || absoluteUrl("/placeholder.webp"),
       serviceType: service[0]?.title?.rendered || undefined,
       areaServed: {
         "@type": "AdministrativeArea",
@@ -157,21 +162,19 @@ export default async function ServicePage({ params }) {
                   "@type": "ListItem",
                   position: 1,
                   name: "Начало",
-                  item: "https://onlineinsurance.bg/",
+                  item: absoluteUrl("/"),
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Застраховки",
-                  item: "https://onlineinsurance.bg/zastrahovki",
+                  item: absoluteUrl("/zastrahovki"),
                 },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: service[0].title.rendered,
-                  item:
-                    meta.canonical ||
-                    `https://onlineinsurance.bg/zastrahovki/${slug}`,
+                  item: absoluteUrl(`/zastrahovki/${slug}`),
                 },
               ],
             }),
@@ -251,7 +254,5 @@ export default async function ServicePage({ params }) {
         </div>
       </>
     );
-  } catch (error) {
-    return <p>Error: {error.message}</p>;
   }
 }

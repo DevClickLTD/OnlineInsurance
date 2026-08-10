@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import Navigation from "../components/nav";
 import CookieConsentBanner from "../components/cookieConsentBanner";
 import Footer from "../components/footer";
@@ -7,6 +6,7 @@ import ImagePreloader from "../components/ImagePreloader";
 import { CriticalCSS } from "./critical-css";
 import BackToTop from "../components/BackToTop";
 import { getServicesNav } from "../services/services";
+import { SITE_URL } from "../services/seo";
 import NextTopLoader from "nextjs-toploader";
 import "../styles/globals.css";
 import { Roboto } from "next/font/google";
@@ -22,11 +22,8 @@ const roboto = Roboto({
 });
 
 export async function generateMetadata() {
-  const host = (await headers()).get("host"); // Get the current domain
-  const protocol = host?.includes("localhost") ? "http" : "https"; // Adjust for local dev
-
   return {
-    metadataBase: new URL(`${protocol}://${host}`),
+    metadataBase: new URL(SITE_URL),
     title: {
       template: "%s | OnlineInsurance.bg",
       default: "OnlineInsurance.bg | Онлайн застрахователни услуги",
@@ -76,12 +73,6 @@ export default async function RootLayout({ children }) {
         <CriticalCSS />
         <link
           rel="preconnect"
-          href="https://onlineinsurance.bg"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://onlineinsurance.bg" />
-        <link
-          rel="preconnect"
           href="https://onlineinsurance.admin-panels.com"
           crossOrigin="anonymous"
         />
@@ -127,8 +118,8 @@ export default async function RootLayout({ children }) {
                 {
                   "@type": "InsuranceAgency",
                   name: "OnlineInsurance.bg",
-                  url: "https://onlineinsurance.bg",
-                  logo: "https://onlineinsurance.bg/logo.png",
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/logo.png`,
                   contactPoint: [
                     {
                       "@type": "ContactPoint",
@@ -144,11 +135,10 @@ export default async function RootLayout({ children }) {
                 {
                   "@type": "WebSite",
                   name: "OnlineInsurance.bg",
-                  url: "https://onlineinsurance.bg",
+                  url: SITE_URL,
                   potentialAction: {
                     "@type": "SearchAction",
-                    target:
-                      "https://onlineinsurance.bg/blog?page=1&q={search_term_string}",
+                    target: `${SITE_URL}/blog?page=1&q={search_term_string}`,
                     "query-input": "required name=search_term_string",
                   },
                 },

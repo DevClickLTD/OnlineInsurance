@@ -15,7 +15,8 @@ export async function generateMetadata() {
     title,
     description,
     alternates: {
-      canonical: meta?.canonical || "/privacy-policy",
+      // Не използваме meta.canonical от Yoast - сочи към WordPress бекенда.
+      canonical: "/privacy-policy",
     },
     openGraph: {
       title: meta?.og_title || title,
