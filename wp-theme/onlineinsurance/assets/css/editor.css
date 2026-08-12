@@ -1,0 +1,17 @@
+/*
+ * Стилове само за блоковия редактор (wp-admin).
+ * OI секционните блокове се разпъват на цялата ширина на платното,
+ * за да изглеждат както на сайта. Обикновените блокове (параграф,
+ * заглавие и т.н.) си остават с нормалната четима ширина.
+ */
+
+.editor-styles-wrapper .wp-block[data-type^="oi/"] {
+	max-width: none !important;
+	width: 100%;
+}
+
+/* Платното без странични отстъпи за секционните блокове */
+.editor-styles-wrapper .is-root-container > .wp-block[data-type^="oi/"] {
+	margin-left: 0;
+	margin-right: 0;
+}

@@ -27,7 +27,7 @@ add_action( 'after_setup_theme', function () {
 
 	// Tailwind стиловете на темата важат и в блоковия редактор.
 	add_theme_support( 'editor-styles' );
-	add_editor_style( 'assets/css/theme.css' );
+	add_editor_style( array( 'assets/css/theme.css', 'assets/css/editor.css' ) );
 } );
 
 /* -------------------------------------------------- Gutenberg блокове */
