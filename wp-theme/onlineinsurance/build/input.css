@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "./wordpress-generated.css";
+
+@source "../*.php";
+@source "../assets/js/main.js";
+@source "../blocks/**/*.php";
+@source "../blocks/editor.js";
+
+body {
+  font-family: Roboto, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: Roboto, system-ui, sans-serif;
+}
+
+/* Изображения в WP съдържанието */
+.wordpress-content img {
+  border-radius: 0.75rem;
+  height: auto;
+  max-width: 100%;
+}

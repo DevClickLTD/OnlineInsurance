@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/cta",
+	"title": "OI: CTA секция",
+	"category": "onlineinsurance",
+	"icon": "megaphone",
+	"description": "Тъмна call-to-action секция със заглавие, текст и бутони.",
+	"textdomain": "onlineinsurance",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Готови за сигурността?"
+		},
+		"description": {
+			"type": "string",
+			"default": "Започнете днес и получете безплатна оферта за застраховка, която ще ви даде спокойствие и сигурност за утрешния ден. Нашите експерти са готови да ви консултират и намерят най-подходящото решение за вас."
+		},
+		"btnPrimaryText": {
+			"type": "string",
+			"default": "Всички застраховки"
+		},
+		"btnPrimaryUrl": {
+			"type": "string",
+			"default": "/zastrahovki"
+		},
+		"btnSecondaryText": {
+			"type": "string",
+			"default": "Блог"
+		},
+		"btnSecondaryUrl": {
+			"type": "string",
+			"default": "/blog"
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}

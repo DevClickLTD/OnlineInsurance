@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/incentive-item",
+	"title": "OI: Предимство",
+	"category": "onlineinsurance",
+	"icon": "yes-alt",
+	"description": "Едно предимство с икона, заглавие и текст.",
+	"textdomain": "onlineinsurance",
+	"parent": [ "oi/incentives" ],
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Заглавие"
+		},
+		"text": {
+			"type": "string",
+			"default": "Описание на предимството."
+		},
+		"iconUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"iconId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/partners",
+	"title": "OI: Наши партньори",
+	"category": "onlineinsurance",
+	"icon": "groups",
+	"description": "Секция с партньорите - заглавие, описание и лого.",
+	"textdomain": "onlineinsurance",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Наши партньори"
+		},
+		"description": {
+			"type": "string",
+			"default": "Работим с водещи застрахователни компании в България, за да ви предложим най-добрите застрахователни продукти и услуги. Нашият опит и партньорства ни позволяват да осигурим надеждно покритие и конкурентни цени за всички наши клиенти."
+		},
+		"logoUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"logoId": {
+			"type": "number",
+			"default": 0
+		},
+		"logoAlt": {
+			"type": "string",
+			"default": "insurance.bg"
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,12 @@
+/*
+Theme Name: OnlineInsurance
+Theme URI: https://www.onlineinsurance.bg
+Author: DevClick
+Description: Custom theme for OnlineInsurance.bg - ported 1:1 from the Next.js application design (Tailwind CSS).
+Version: 1.0.0
+Requires PHP: 7.4
+License: Proprietary
+Text Domain: onlineinsurance
+*/
+
+/* Styles are compiled into assets/css/theme.css and enqueued from functions.php */

@@ -1,0 +1,70 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/hero",
+	"title": "OI: Hero секция",
+	"category": "onlineinsurance",
+	"icon": "cover-image",
+	"description": "Hero секцията от началната страница - заглавие, текст, бутони и изображение.",
+	"textdomain": "onlineinsurance",
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"attributes": {
+		"badgeText": {
+			"type": "string",
+			"default": "Полезни статии и новини от нашия блог."
+		},
+		"badgeLinkText": {
+			"type": "string",
+			"default": "Вижте повече"
+		},
+		"badgeLinkUrl": {
+			"type": "string",
+			"default": "/blog"
+		},
+		"title": {
+			"type": "string",
+			"default": "Сигурност и защита за вашето бъдеще"
+		},
+		"tagline": {
+			"type": "string",
+			"default": "Онлайн застраховане"
+		},
+		"descMobile": {
+			"type": "string",
+			"default": "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути с нашата удобна онлайн платформа."
+		},
+		"descDesktop": {
+			"type": "string",
+			"default": "Открийте най-добрите застрахователни решения за автомобили, домове, здраве и живот. Получете безплатна оферта за минути и се насладете на сигурността, която заслужавате. Нашите експерти са тук, за да ви помогнат да направите правилния избор за вас и вашето семейство."
+		},
+		"btnPrimaryText": {
+			"type": "string",
+			"default": "Застраховки"
+		},
+		"btnPrimaryUrl": {
+			"type": "string",
+			"default": "/zastrahovki"
+		},
+		"btnSecondaryText": {
+			"type": "string",
+			"default": "Блог"
+		},
+		"btnSecondaryUrl": {
+			"type": "string",
+			"default": "/blog"
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}

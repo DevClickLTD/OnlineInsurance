@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/latest-posts",
+	"title": "OI: Последни новини",
+	"category": "onlineinsurance",
+	"icon": "admin-post",
+	"description": "Тъмна секция с последните 3 публикации от блога (динамична).",
+	"textdomain": "onlineinsurance",
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Последни новини"
+		},
+		"count": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}

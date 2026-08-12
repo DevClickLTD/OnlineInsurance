@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oi/incentives",
+	"title": "OI: Защо да изберете нас",
+	"category": "onlineinsurance",
+	"icon": "star-filled",
+	"description": "Тъмна секция със заглавие, описание, изображение и предимства (вътрешни блокове).",
+	"textdomain": "onlineinsurance",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Защо да изберете нас?"
+		},
+		"description": {
+			"type": "string",
+			"default": "С над 15 години опит в застрахователната бранша, ние сме вашият надежден партньор за защита на всичко, което е важно за вас. От автомобилно застраховане до комплексни решения за дома и семейството, ние предлагаме индивидуални решения, прилагодени към вашите нужди."
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "oi-blocks-editor",
+	"render": "file:./render.php"
+}
